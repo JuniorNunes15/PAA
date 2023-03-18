@@ -1,0 +1,110 @@
+Questão 1
+Algoritmo para calcular ⌊√n⌋.
+
+Pseudocódigo:
+
+    1.algoritmo Calcula_Raiz_N(int n):
+    2.  para i <- 0 até n faça:
+    3.    se i * i == n
+    4.      retorne i
+    5.    senão se (i * i > n)
+    6.      retorne i-1
+  
+Questão 2
+Pesquise e explique com suas palavras um exemplo de demonstração utilizando a técnica de prova por indução.
+
+A prova por indução é um príncipío matematico, que diz que quando tivermos o primeiro elemento verdadeiro, podemos mostrar que todos os valores seguintes, também são verdadeiros. Ou seja, quando temos um valor n0 como verdadeiro, podemos provar que qualquer valor seguinte a este n0 é verdadeiro. E com isso, a indução vai provando para todos os valores. A indução possui dois passos, o primeiro sendo provar o caso base e o segundo sendo provar para o valor seguinte do caso base, ou seja, fazer o passo indutivo.
+Caso base:
+
+Dizemos a proposição P(1) é verdadeira
+
+Passo indutivo:
+
+A implicação P(k) -> P(k+1) é verdadeira para todos os inteiros positivos k.
+
+E seguindo esses dois passos, conseguimos provar de forma indutiva.
+Exemplo:
+
+
+  Vamos provar que podemos utilizar a equação n = (n*(n+1))/2 para todos os inteiros n >= 1:
+  Caso base:
+    P(1): temos que provar que para n0 = 1, tem: 1 = (1*(1+1))/2
+    Ou seja, a formula é verdadeira para n0 = 1.
+  Passo indutivo:
+    Supondo que a fórmula é verdadeira para n=k:
+      P(k): 1 + 2 + ... + k = (k*(k+1))/2 , para algum k >= 1
+    se a fórmula é verdadeira para n = k então deve ser verdadeira para n=k+1, ou seja, P(k) -> P(k +1).
+    Vamos ter que mostrar que a forma a seguir também vai ser verdadeira, ou seja, é nessa forma que teremos que chegar como resultado:
+      P(k + 1): 1 + 2 + ... + (k + 1) = ((k+1)*(k+2))/2
+    Para começar a provar, vamos pegar 1 + 2 + ... + k + (k + 1).
+    Como já supomos que k é verdadeira, podemos substituir ele, por seu resultado, ficando:
+      = (k*(k+1))/2 + (k+1)
+    A partir daqui, podemos apenas continuar a fazer manipulações matematicas, para chegarmos no resultado:
+    primeiro, multiplicamos (k+1) * 2/2, então ficamos:
+      = (k*(k+1))/2 + (2*(k+1))/2
+    Agora podemos somar:
+      = (k*(k+1) + 2*(k+1)) / 2
+    Agora, fazemos a distribuição, ficando:
+      = (k² + 3k + 2) / 2
+    E para terminar, vamos separar novamente:
+      = ((k = 1)*(k + 2)) / 2
+    E com isso, chegamos no resultado que queriamos, mostrando que podemos provar para todo k+1.
+  
+Questão 3
+Ordenação por seleção
+
+Pseudocódigo:
+
+  1.algoritmo Ordenacao_Selecao(V[1..n]):
+  2.  para i <- 1 até n faça:
+  3.    index_min = i
+  4.    para j <- até n faça:
+  5.      se V[index_min] > V[j]
+  6.        index_min = j
+  7.    troque(V[i], V[index_min])
+
+Antes de irmos para o melhor e o pior caso, vamos contar quantas vezes cada linha executa.
+A linha 2, vai executar n vezes.
+
+A linha 3, vai executar n-1 vezes.
+
+A linha 4, vai executar $$\sum_{j=2}^{n} tj.$$
+
+A linha 5, vai executar $$\sum_{j=2}^{n} (tj - 1).$$
+
+A linha 6, pode executar $$\sum_{j=2}^{n} (tj - 1).$$
+
+A linha 7, vai executar n-1 vezes.
+
+Com isso, podemos montar a equação:
+$$T(n) = C1 * n + C2 * (n - 1) + C3 * \sum_{j=2}^{n} tj + C4 * \sum_{j=2}^{n} (tj - 1) + C5 * \sum_{j=2}^{n} (tj - 1) + C6 * (n - 1) $$
+
+Tempo de execução no melhor caso:
+
+O melhor caso será quando o vetor já estiver ordenado, com isso a linha 5 nunca vai executar, então só teremos que calcular:
+$$T(n) = C1 * n + C2 * (n - 1) + C3 * \sum_{j=2}^{n} tj + C4 * \sum_{j=2}^{n} (tj - 1) + C6 * (n - 1) $$
+Agora podemos substituir os somatorios:
+$$T(n) = C1 * n + C2 * (n - 1) + C3 * (n(n + 1)/2 - 1) + C4 * n(n - 1)/2 + C6 * (n - 1) $$
+$$T(n) = C1*n + C2*n - C2 + C3*(n²+n)/2 - C3 + C4*(n²-n)/2 + C6*n - C6 $$
+$$T(n) = C1*n + C2*n - C2 + C3*n²/2 + C3*n/2 - C3 + C4*n²/2 - C4*n/2 + C6*n - C6 $$
+Arrumando ele fica:
+$$T(n) = C3*n²/2 + C4*n²/2 + C1*n + C2*n + C3*n/2 - C4*n/2 + C6*n - C2 - C3 - C6 $$
+$$T(n) = (C3*/2 + C4/2)*n² + (C1 + C2 + C3/2 - C4/2 + C6)*n + (- C2 - C3 - C6) $$
+Podemos substituir (C3*/2 + C4/2) = a, (C1 + C2 + C3/2 - C4/2 + C6) = b, (- C2 - C3 - C6) = c:
+$$T(n) = a*n² + b*n + c $$
+Então podemos dizer que o tempo de execução no melhor caso, vai ser quadratico em n.
+
+Tempo de execução no pior caso:
+
+Neste algoritmo, a questão no tempo de execução irá ser semelhante ao do melhor caso, mas terá sempre a execução da linha 5, que vai ser o caso onde o vetor está em ordem decrescente.
+$$T(n) = C1 * n + C2 * (n - 1) + C3 * \sum_{j=2}^{n} tj + C4 * \sum_{j=2}^{n} (tj - 1) + C5 * \sum_{j=2}^{n} (tj - 1) + C6 * (n - 1) $$
+Então vamos seguir a mesma regra de substituição que utilizamos no melhor caso:
+$$T(n) = C1 * n + C2 * (n - 1) + C3 * (n(n + 1)/2 - 1) + C4 * n(n - 1)/2 + C5 * n(n - 1)/2 + C6 * (n - 1) $$
+$$T(n) = C1*n + C2*n - C2 + C3*(n²+n)/2 - C3 + C4*(n²-n)/2 + C5*(n²-n)/2 + C6*n - C6 $$
+$$T(n) = C1*n + C2*n - C2 + C3*n²/2 + C3*n/2 - C3 + C4*n²/2 - C4*n/2 + C5*n²/2 - C5*n/2 + C6*n - C6 $$
+$$T(n) = C3*n²/2 + C4*n²/2 + C5*n²/2 + C1*n + C2*n + C3*n/2 - C4*n/2 - C5*n/2 + C6*n - C2 - C3 - C6 $$
+$$T(n) = (C3*/2 + C4/2 + C5/2)*n² + (C1 + C2 + C3/2 - C4/2 - C5/2 + C6)*n + (- C2 - C3 - C6) $$
+$$T(n) = a*n² + b*n + c $$
+O tempo de pior caso, também vai ser quadratico em n.
+
+Como podemos ver, o tempo de melhor e pior caso, vão ser quadraticos, a verdadeira diferença, é que apenas por conta da linha C5, que o melhor caso vai ser mais rápida. Mas ainda sim, sem ter uma diferença realmente grande.
