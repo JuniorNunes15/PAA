@@ -20,15 +20,18 @@
     <li>
     <p><strong>Questão 1 (Partição).</strong> 
       <pre><code>
-        algoritmo(L[], val_inicial, val_final):
-          pivo = L[val_final]
-          i = val_inicial - 1
-          for(j = val_inicial; j < val_final-1; j++):
-            if(L[i] >= pivo):
-              i++
-              swap(L, i, j)
-          Swap(L, i+1, val_final)
-          return i
+        int particao(int L[], int val_inicial, int val_final) {
+          int pivo = L[val_final];
+          int i = val_inicial - 1;
+          for(j = val_inicial; j < val_final-1; j++) {
+            if(L[i] >= pivo) {
+              i++;
+              swap(L, i, j);
+            }
+          }
+          Swap(L, i+1, val_final);
+          return i;
+        }
 
       </code></pre>
       
@@ -40,11 +43,27 @@
           <li>O codigo do loop é a partir do for, até seu final. Ele mantem as invariantes de loop sempre que o valor de L[i] é menor que o pivo. </li>
           <li>Como o loop vai passar por todos os elementos, o valor de j no final, sempre terá o valor do array -1, ou seja, o valor de i-1</li>
           <li>Código pós-loop: o swap e o return.</li>
-          <li></li>
+          <li><code><pre>
+            particao(array, val_inicial, val_final):
+              pivo <- array[val_final]
+              i <- val_inicial-1
+              para j <- val_inicial até val_final-1, faça:
+                se L[i] >= pivo:
+                  i++
+                  troque(array, i, j)
+              troque(array, i+1, val_final)
+              retorne i
+          </pre></code></li>
           <li>(i)se a lista possui apenas um elemento, a alteração deve ser que ela já deve ser considerada ordenada, e apenas retornada sem precisar passar por todos os processos do código. 
             (ii) Se nenhum elemento é maior que o pivo, então o pivo deve receber o elemento anterior a ele, e então comparar de novo com todos os outros elementos. 
             (iii) Se todos os elementos são maiores que o pivo, oque deve ser feito é jogar o pivo pra primeira posição e então atualizar o pivo para receber o novo elemento que está no final da lista</li>
-            <li></li>
+            <li>Complexidade:
+              As linhas 1, 2, 7 e 8 terão tempo de execução Θ(1), enquanto que a linha 3 vai ter tempo de execução Θ(n), e as linhas 4, 5 e 6 vão ter tempo de execução Θ(n-1).
+              Fazendo a soma deles temos:
+              $$= 4 * \Theta(1) + \Theta(n) + 3 * \Theta(n-1)$$
+              $$= \Theta(n) + 3 * \Theta(n-1) + 4 * \Theta(1) = O(n)$$
+              Então a complexidade dele é O(n).
+            </li>
         </ol>
       </p>
     </p></li>
