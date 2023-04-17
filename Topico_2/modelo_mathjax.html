@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Modelo de uso do MathJax (HTML+Latex)</title>
+
+  <!-- MATHJAX 3 (através da CDN) -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- MATHJAX 3 (salvo no computador) -->
+  <!-- <script type="text/javascript" async src="../../../Aplicativos/MathJax-master/es5/tex-mml-chtml.js" async></script> -->
+</head>
+<body>
+
+Questão 1:
+a) $$lg (100n^3+200n+300)^2=O(lg n)$$
+Precisamos encontrar um C e um n0, tal que seja verdadeira:
+$$lg (100n^3+200n+300)^2 \leq C*(lg n)$$
+vamos utilizar as propriedades dos logaritimos para fazer:
+$$2 * lg (100n^3+200n+300) \leq C*(lg n)$$
+Com isso já é pelo menos possivel ver que o valor de C que quero é maior que 2. Então vamos tentar pegar um valor mais alto, para verificar, como o C = 10.
+$$2 * lg (100n^3+200n+300) \leq 10*(lg n)$$
+Vamos tentar substituir n0 por 10, o resultado dele fica aproximadamente:
+$$10,02 \leq 10$$
+Isso ainda é falso, mas dá para vermos que se pegarmos n0 = 11, a equação vai começar a ser verdadeira, ficando:
+$$10,27 \leq 10,42$$
+Assim é possivel ver que com C = 10 e n0 = 11, a equação fica verdadeira, para todo n0 &lt;= n.
+
+Ou seja, ela é verdadeira.
+$$$$
+b) $$n^2-200n-300=O(n)$$
+Nessa já é possivel ver que ela é falsa, pois a notação deveria ser O(n^2) e não apenas O(n).
+Mas vamos provar.
+Se tentarmos pegar qualquer C e qualquer n0, podemos ver que para valores baixo, a equação vai ser verdadeira:
+$$n^2-200n-300 &lt;= O(n)$$
+Então vamos mostrar como um contra exemplo que quanto mais grande os valores, a desigualdade se torna falsa.
+peguemos valores altos para C e n0, como C = 15 e n0 = 250, e então substituimos:
+$$250^2-200*250-300 &lt;= 15*200$$
+$$12200 &lt; 3750$$
+isso é falso, e para qualquer valor de n0 &lt;= n a desigualdade que queriamos vai ser falsa.
+E não importa aumentar o valor de C, que sempre chegaremos no caso onde a primeira equação vai ser maior que a segunda.
+Ou seja, tornando ela falsa.
+$$$$
+c)$$2n^2-20n-50 = \Omega(2n)$$
+Vamos chamar de $$f(n) = 2n^2-20n-50 , g(n) = 2n $$
+Para saber se é verdadeiro, precisamos fazer:
+$$C*g(n) &lt;= f(n)$$
+Com C uma constante qualquer;
+vamos pegar C = 1 e n0 = 13.
+Com esses dois valores conseguimos tornar a desigualdade verdadeira, pois substituindo:
+$$1*2n &lt;= 2n^2-20n-50$$
+$$26 &lt;= 28$$
+isso é verdadeiro, e para todo valor n0 &lt;= n isso vai continuar sendo verdadeiro.
+$$$$
+d)
+$$lg n^2 = \Theta(lg n + 5)$$
+Chamaremos de:
+$$f(n) = lg n^2 , g(n) =  lg n + 5$$
+Precisamos provar que:
+$$ C1*g(n) &lt;= f(n) &lt;= C2*g(n)$$
+Sendo C1 e C2 positivos qualquer.
+Vamos escolher os valores C1 = 1/5 e C2 = 10. Se assumirmos que n0 = 4, poderiamos ter uma forma de solução, pois ficaria:
+$$\frac{1}{5} * (lg n + 5) \leq lg n^2 \leq 10*(lg n + 5) $$
+Teremos que ela será verdadeira, com isso para todos os n0 &lt;= n também será verdadeiros.
+$$$$
+e)
+$$2^{2n} = O(2^n)$$
+Precisamos provar:
+$$2^{2n} \leq C*(2^n)$$
+Já é possivel ver que a equação é falsa, pois a primeira, sempre vai ficar maior por estar dobrando o expoente, então mesmo que no inicio a segunda seja maior para valores mais pequenos, ela depois sempre fica menor para valores maiores.
+Ou seja, ela gera uma contradição, onde n0 &lt;= n não é verdadeira.
+Peguemos o exemplo de C = 5 e n0 = 2:
+$$2^{2n} \leq 5*(2^n)$$
+$$2^{2*2} \leq 5*(2^2)$$
+$$16 \leq 20$$
+Isso é verdadeiro, mas se pegarmos agora n0 = 3:
+$$2^{2*3} \leq 5*(2^3)$$
+$$64 \leq 40$$
+E isso é falso, ou seja, temos que ela é falsa.
+
+
+Questão 2: 
+Prove:
+$$f1(n)=O(g1(n)) , f2(n)=O(g2(n)) , \rightarrow f1(n)+f2(n) = O(g1(n)+g2(n))$$
+Vamos iniciar somando f1 e f2:
+$$f1(n) + f2(n) = $$
+$$O(g1(n)) + O(g2(n)) = $$
+Pela definição do big O, temos que eles estão sendo multiplicadas por uma constante C, ou seja:
+$$C * g1(n) + C * g2(n) = $$
+Colocamos o C em evidencia:
+$$C * (g1(n) + g2(n)) = $$
+Então podemos voltar para definição do big O:
+$$O(g1(n) + g2(n))$$
+Então com isso conseguimos provar que:
+$$f1(n)+f2(n) = O(g1(n)+g2(n))$$
+
+
+
+
+
+
+</body>
+</html>
