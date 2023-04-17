@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Modelo de uso do MathJax (HTML+Latex)</title>
+
+  <!-- MATHJAX 3 (através da CDN) -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- MATHJAX 3 (salvo no computador) -->
+  <!-- <script type="text/javascript" async src="../../../Aplicativos/MathJax-master/es5/tex-mml-chtml.js" async></script> -->
+</head>
+<body>
+
+  <h1>Questões</h1>
+
+  <ul>
+    <li>
+    <p><strong>Questão 1 (Partição).</strong> 
+      <pre><code>
+        algoritmo(L[], val_inicial, val_final):
+          pivo = L[val_final]
+          i = val_inicial - 1
+          for(j = val_inicial; j < val_final-1; j++):
+            if(L[i] >= pivo):
+              i++
+              swap(L, i, j)
+          Swap(L, i+1, val_final)
+          return i
+
+      </code></pre>
+      
+      <p>
+        <ol type="a">
+          <li>Medida de progresso: número de k elementos já lidos.
+            Como o algoritmo sempre separa vai estar separando os elementos, vai er um momento que não vai ter mais oque ordenar, então o algoritmo irá encerrar. </li>
+          <li>Invariante do loop: São os valores do pivo, e da posição do primeiro -1 elemento da lista. </li>
+          <li>O codigo do loop é a partir do for, até seu final. Ele mantem as invariantes de loop sempre que o valor de L[i] é menor que o pivo. </li>
+          <li>Como o loop vai passar por todos os elementos, o valor de j no final, sempre terá o valor do array -1, ou seja, o valor de i-1</li>
+          <li>Código pós-loop: o swap e o return.</li>
+          <li></li>
+          <li>(i)se a lista possui apenas um elemento, a alteração deve ser que ela já deve ser considerada ordenada, e apenas retornada sem precisar passar por todos os processos do código. 
+            (ii) Se nenhum elemento é maior que o pivo, então o pivo deve receber o elemento anterior a ele, e então comparar de novo com todos os outros elementos. 
+            (iii) Se todos os elementos são maiores que o pivo, oque deve ser feito é jogar o pivo pra primeira posição e então atualizar o pivo para receber o novo elemento que está no final da lista</li>
+            <li></li>
+        </ol>
+      </p>
+    </p></li>
+
+    <li>
+      <p><strong>Questão 2:</strong>
+        <pre><code>
+          algoritmo(n):
+          l1    para i de 1 até n 
+          l2        f(i)
+          l3        para j de i+1 até n 
+          l4            g(j)
+          l5    para i de 1 até n 
+          l6        h(i)
+        </code></pre>
+      </p>
+      <p>
+        Temos para cada linha seus tempos:
+      </p>
+      $$l1 = \Theta(n)$$
+      $$l2 = \Theta(i)$$
+      $$l3 e l4 = \sum_{i=1}^{n} \sum_{j = i + 1}^{n} \Theta(\log{n})$$
+      $$l5 = \Theta(n)$$
+      $$l6 = \Theta(n²)$$
+      <p>
+        Com isso temos:
+      </p>
+      $$\Theta(n) + \Theta(i) + \sum_{i=1}^{n} \sum_{j = i + 1}^{n} \Theta(\log{j}) + \Theta(n) + \Theta(n²)$$
+      <p>
+        Do somatorio podemos fazer:
+      </p>
+      $$\sum_{i=1}^{n} \sum_{j = i + 1}^{n} \Theta(\log{j}) = \sum_{i=1}^{n} \sum_{j = i + 1}^{n} \log{j} = \sum_{i=1}^{n} (n - i)\log{n} = \Theta((n-i)* \log{n}) = \Theta(n\log{n})$$
+      <p>
+        Agora podemos substituir na equção:
+      </p>
+      $$= \Theta(n) + \Theta(i) + \Theta(n\log{n}) + \Theta(n) + \Theta(n²)$$
+      <p>
+        Então temos que a complexidade do algoritmo é:
+      </p>
+      $$= \Theta(n\log{n}) + \Theta(i) + 2*\Theta(n) + \Theta(n²) = O(n²)$$
+    </li>
+  
+    </ul>
+
+</body>
+</html>
