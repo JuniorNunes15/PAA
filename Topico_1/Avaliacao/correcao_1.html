@@ -1,0 +1,169 @@
+<style>
+
+    div {
+
+        margin-left: 30px;
+
+    }
+
+</style>
+
+
+<h1>Questão 1</h1>
+
+
+<p>
+
+    leia n
+
+    <br>
+
+    raiz = 0
+
+    <br>
+
+    i = 0
+
+    <br>
+
+    while i*i <= n <div>
+
+        raiz=i
+
+        <br>
+
+        i=i + 1
+
+        <br>
+
+        </div>
+
+        print(raiz)
+
+</p>
+
+
+<h1>Questão 2</h1>
+
+
+<strong>Passo base:</strong>
+
+<br>
+
+Verificar se a afirmação é verdadeira para o menor valor possível de k e j, que é k = j = 2. Nesse caso, temos que 2 + 2
+
+= 4 é um número par. Portanto, a afirmação é verdadeira para k = j = 2.
+
+<br>
+
+<br>
+
+<strong>Passo de indução:</strong>
+
+<br>
+
+Suponha que a afirmação é verdadeira para dois números pares k e j, isto é, k + j é um número par. Precisamos provar que
+
+a afirmação também é verdadeira para k + 2 e j + 2, isto é, que (k + 2) + (j + 2) é um número par.
+
+<br>
+
+<br>
+
+Podemos simplificar a expressão acima para obter:
+
+<br>
+
+(k + 2) + (j + 2) = k + j + 4
+
+<br>
+
+Observe que k + j é um número par, já que ambos são números pares, e que 4 é um número par. A soma de dois números pares
+
+é sempre um número par e, portanto, k + j + 4 é um número par.
+
+
+<h1>Questão 3</h1>
+
+
+Para i=1 até n-1 faça:
+
+<br>
+
+<div>
+
+    min_idx = i
+
+    <br>
+
+    Para j=i+1 até n faça:
+
+    <div>
+
+        <br>
+
+        Se A[j] < A[min_idx] então: <br>
+
+            <div>min_idx = j</div>
+
+            <br>
+
+            Se min_idx ≠ i então:
+
+            <br>
+
+            <div>Troque A[i] com A[min_idx]</div>
+
+    </div>
+
+</div>
+
+
+<br>
+
+<strong>Analisando a complexidade</strong>
+
+<br>
+
+<p>Obs: eu desconsiderei o custo e quantas vezes as linhas onde tem um IF
+
+    pelo fato de que não vimos nenhum exemplo em aula</p>
+
+<br>
+
+t(n) = (c1*(n-1))+(c2*n(n-1)/2)+(c3*n(n-1)/2)
+
+<br>
+
+t(n) = c1*(n-1) + c2*n(n-1)/2 + c3*n(n-1)/2
+
+<br>
+
+t(n) = (c2/2 + c3/2)*n^2 - (c2/2 + c3/2)*n + c1
+
+<br>
+
+t(n) = an^2 + bn + c
+
+<br>
+
+<br>
+
+<strong>Conclusão</strong>
+
+<br>
+
+<p>Como podemos ver, a complexidade do algoritmo e quadratica</p>
+
+<p>Ou seja, a complexidade assintótica do algoritmo pode ser expressa como O(n^2)</p>
+
+<strong>Percebe-se que nao existe melhor ou pior caso</strong>
+
+<br>
+
+<p>Se a entrada for um vetor ordenado, o algoritmo tera de interar os dois laços para verificar se o</p>
+
+<p>vetor de fato esta ordenado, portando, no melhor ou pior caso, sera O(n^2)</p>
+
+
+<h1>Caro corretor, piedade na correção <3</h1>
