@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Modelo de uso do MathJax (HTML+Latex)</title>
+
+  <!-- MATHJAX 3 (através da CDN) -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- MATHJAX 3 (salvo no computador) -->
+  <!-- <script type="text/javascript" async src="../../../Aplicativos/MathJax-master/es5/tex-mml-chtml.js" async></script> -->
+</head>
+<body>
+  
+  <h1>Questões</h1>
+
+  <ul>
+    <li>
+    <p><strong>Questão 1 (Torres de Hanói).</strong> 
+      <ol type="a">
+        <li>
+          <code>
+            <pre>
+              algoritmo Torres_Hanoi(posicao, inicial, final, aux, cont):
+                se posicao == 1 {
+                  mostre("mova disco 1 de " + inicial + " para " + final)
+                  cont <- cont + 1
+                }
+                se não {
+                  Torres_Hanoi(posicao-1, inicial, aux, final, cont)
+                  mostre("mova " + posicao + " de " + inicial + " para " + final)
+                  cont <- cont + 1
+                  Torres_Hanoi(posicao-1, aux, final, inicial, cont)
+                }
+            </pre>
+          </code>
+        </li>
+        <li>
+          O algoritmo vai rodar n-1 vezes.
+          $$
+          T(n) =
+            \begin{cases}
+              \Theta(1)                & \quad \text{se } n = 1;\\
+              T(n-1) + \Theta(1)       & \quad \text{se } n > 1.
+            \end{cases}
+          $$
+          $$T(n) = T(n-1) + \Theta(1)$$
+          $$T(n) = (n-1) + \Theta(1) + T(n-1) + \Theta(1)$$
+          $$T(n) = (n-1) + (n-1) + \Theta(1) + \Theta(1) + ... + T(n-n) + \Theta(n)$$
+          $$T(n) = (n-1) + (n-1) + \Theta(1) + \Theta(1) + ... + T(0) + \Theta(n)$$
+          $$T(n) = (n-1) + (n-1) + \Theta(1) + \Theta(1) + ... + \Theta(n)$$
+          Com isso já podemos ver que $$T(n) \in \Theta(n)$$
+        </li>
+        <li>
+          $$\text{Ele é otimo, pois faz todo o esforço de T(n) em }\Theta(n)\text{ ou seja } T(n) \in \Theta(n)$$
+        </li>
+        </ol>
+    </p>
+    </li>
+
+    <li>
+      <p><strong>Questão 2 (Máximo de vetor)</strong></p>
+      <code>
+        <pre>
+          algoritmo forma_1(vetor, tamanho):
+            se (tamanho == 1):
+              retorne vetor[tamanho]
+            se não:
+              aux <- forma_1(vetor, tamanho-1)
+              se(vetor[tamanho] < aux):
+                troque(vetor[tamanho-1], vetor[tamanho])
+              se não:
+                aux <- vetor[tamanho]
+            retorne aux
+        </pre>
+      </code>
+      <code>
+        <pre>
+          algoritmo forma_2(vetor, inicial, tamanho):
+            se (tamanho == 1):
+              retorn vetor[tamanho]
+            se não:
+              metade <- inicial + (tamanho-inicial)/2
+              aux <- forma_2(vetor, inicial, metade)
+              aux2 <- forma_2(vetor, metade, tamanho)
+              se (aux > aux2):
+                retorne aux
+              se não:
+                retorne aux2
+        </pre>
+      </code>
+      Por mais que os dois códigos tenham quase o mesmo tempo de execução, sendo \(\Theta(n)\), temos que o segundo algoritmo, de divisão e conquista, vai ser mais rápido, pois ele divide todos os seus esforços pela metade, logo consegue fazer tudo  mais rápido.
+    </li>
+
+    <li>
+      <p><strong>Questão 3:</strong>
+        <ol type="a">
+          <li>
+            $$
+            T(n) =
+              \begin{cases}
+                1                & \quad \text{se } n = 1;\\
+                T(n-1)+n/2       & \quad \text{se } n > 1.
+              \end{cases}
+            $$
+            utilizando o metodo da iteração temos:
+            $$T(n) = n/2 + T(n-1)$$
+            $$T(n) = n/2 + (n-1) + T(n-1)$$
+            $$T(n) = n/2 + (n-1) + (n-1) + T(n-1)$$
+            $$T(n) = n/2 + (n-1) + (n-1) + (n-1) ... (n-1)$$
+            Teremos que a soma dos termos, nos dara n vezes n-1. Ou seja, podemos construir o somatorio:
+            $$T(n)= n/2 + \sum^{\infty}_{n=1} (n-1)$$
+            Que é igual a:
+            $$T(n) = n/2 + n(n-1)$$
+            Vamos supor que vamos iterar n vezes.
+            A equação vai parar quando n*(n-1) <= 1
+            A soma completa fica:
+            $$T(n) = (n/2 + n*(n-1))$$
+            
+            Com isso já é possivel verificar que no final ela será O(n²), então temos que:
+            $$T(n) \in \Theta(n²)$$ 
+          </li>
+          <li>
+            $$
+            T(n) =
+              \begin{cases}
+                1                       & \quad \text{se } n = 1;\\
+                4                       & \quad \text{se } n = 2;\\
+                8T(n-1) -15T(n-2)       & \quad \text{se } n > 2.
+              \end{cases}
+            $$
+            $$T(n) = 8T(n-1) - 15T(n-2)$$
+            $$T(n) = 8(n-1) + 64T(n-2) - 15(n-2) - 225T(n-4)$$
+            $$T(n) = 8(n-1) + 64(n-2) + 512T(n-3) - 15(n-2) - 225(n-4) - 3375T(n-6)$$
+            A partir daqui, já dá para verificar que os valores 8 e 15, serão sempre elevados a n. E T(n-1), o -1 sempre vai ser multiplicado por n, e o -2, sempre por 2n.
+            O termo geral da função é: 
+            $$8^i(n-(1*n)) E 15^i(n-(2*2n))$$
+            Vamos supor que iteramos k vezes, com isso, vamos parar quando:
+            $$8^i(n-(1*k)) - 15^i(n-(2*2k)) <= 2$$
+            então temos:
+            $$T(n) = (8(n-1) - 15(n-2) + ... + 8^k(n-1*k) - 15^k(n-2*2k))$$
+            $$T(n) = n * \sum_{i=0}^{\infty}((8^i * 1*i) - (15^i * 2*2i)) $$
+            Com isso temos que $$T(n) \in \Theta(n)$$
+          </li>
+        </ol>
+      </p>
+    </li>
+
+    <li>
+      <p><strong>Questão 4:</strong> 
+        $$
+        T(n) =
+          \begin{cases}
+            1                                 & \quad \text{se } n = 1;\\
+            8T(\lfloor n/2 \rfloor)+n^2       & \quad \text{se } n > 1.
+          \end{cases}
+        $$
+        $$T(n) = 8T(\lfloor n/2 \rfloor) + n^2$$
+        $$T(n) = 8(\lfloor n/2 \rfloor) + 64T(\lfloor n/2 \rfloor) + n^2$$
+        $$T(n) = 8(\lfloor n/2 \rfloor) + 64T(\lfloor n/4 \rfloor) + 512T(\lfloor n/16 \rfloor) + n^2$$
+        Temos que o termo geral da função é:
+        $$8^i\lfloor n/2^i \rfloor$$
+        E o argumento é:
+        $$\lfloor n/2^i \rfloor$$
+        Suponha que iteramos k vezes, paramos quando:
+        $$8^i\lfloor n/2^i \rfloor <= 1$$
+        Com isso, a soma fica:
+        $$T(n) = n^2 + 8(\lfloor n/2 \rfloor) + 64T(\lfloor n/4 \rfloor) + 512T(\lfloor n/16 \rfloor) + ... + 8^k(\lfloor n/2^k \rfloor) $$
+        $$T(n) = n* \sum^{\infty}_{i=0}(8/2)^i$$
+        $$T(n) = 2n$$
+        logo temos que:
+        $$T(n) \in \Theta(n)$$
+      </p>
+    </li>
+  
+    </ul>
+
+</body>
+</html>
